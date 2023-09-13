@@ -1,9 +1,7 @@
 import json
 import os
-from dotenv import load_dotenv
 from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
-
 
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
@@ -44,7 +42,6 @@ def get_playlist(spotipy_client_id, spotipy_client_secret, spotipy_redirect_uri,
     with open('output.json', 'w') as f:
         json.dump(track_list, f, indent=4)
 
-    playlist_id = "08uRURA3zZndPp8Kxd91Uw"  # Replace with your playlist ID
     for i in range(0, len(track_uris), 100):
         chunk = track_uris[i:i + 100]
         sp.playlist_add_items(playlist_id, chunk)
@@ -54,3 +51,4 @@ def get_playlist(spotipy_client_id, spotipy_client_secret, spotipy_redirect_uri,
 if __name__ == '__main__':
     get_playlist(spotipy_client_id=client_id, spotipy_client_secret=client_secret,
                  spotipy_redirect_uri=redirect_uri, scope=scope)
+    
